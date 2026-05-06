@@ -1,0 +1,58 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/deploy-pages.yml"
+      - "apps/site/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "tsconfig.base.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - uses: actions/configure-pages@v5
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Check scan API URL
+        run: test -n "$GET_OUT_SPAM_API_BASE_URL"
+        env:
+          GET_OUT_SPAM_API_BASE_URL: ${{ vars.GET_OUT_SPAM_API_BASE_URL }}
+
+      - run: pnpm --filter get-out-spam-site build
+        env:
+          GET_OUT_SPAM_API_BASE_URL: ${{ vars.GET_OUT_SPAM_API_BASE_URL }}
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/site/dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

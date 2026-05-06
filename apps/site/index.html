@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Get Out Spam</title>
+    <link rel="stylesheet" href="./assets/app.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="scan-panel" aria-labelledby="app-title">
+        <div class="panel-header">
+          <p class="eyebrow">Maintainer scan</p>
+          <h1 id="app-title">Get Out Spam</h1>
+          <p class="lede">Paste a GitHub issue, pull request, or issue-comment link.</p>
+        </div>
+
+        <form id="scan-form" class="scan-form" novalidate>
+          <label for="link-input">GitHub URL</label>
+          <div class="input-row">
+            <input
+              id="link-input"
+              name="url"
+              type="url"
+              inputmode="url"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="https://github.com/owner/repo/issues/123"
+              required
+            />
+            <button id="scan-button" type="submit">Scan</button>
+          </div>
+        </form>
+
+        <p id="endpoint-notice" class="endpoint-notice" hidden>
+          No API endpoint is configured, so this page will call this origin.
+        </p>
+
+        <div id="status-region" class="status-region" role="status" aria-live="polite"></div>
+
+        <section id="result-region" class="result-region" aria-label="Scan result" hidden></section>
+      </section>
+    </main>
+
+    <script type="module" src="./assets/app.js"></script>
+  </body>
+</html>
