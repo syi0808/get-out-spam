@@ -1,0 +1,27 @@
+name: Product Idea
+description: Suggest an improvement to GET OUT SPAM signals, wording, or behavior.
+title: "[Idea]: "
+labels:
+  - idea
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the maintainer situation or risk this should address.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Describe the signal, wording, flow, policy, or control that would help.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: References
+      description: Share public URLs or related examples if available.
+    validations:
+      required: false

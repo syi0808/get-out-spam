@@ -1,5 +1,1 @@
-node_modules/
-dist/
-coverage/
-*.tsbuildinfo
-pnpm-debug.log*
+.DS_Store

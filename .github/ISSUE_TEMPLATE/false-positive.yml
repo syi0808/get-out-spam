@@ -1,0 +1,33 @@
+name: False Positive Report
+description: Report a legitimate case that was flagged as risky.
+title: "[False positive]: "
+labels:
+  - false-positive
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share only public GitHub URLs and reproducible context.
+        Do not post personal information or private conversation content.
+  - type: input
+    id: url
+    attributes:
+      label: Public GitHub URL
+      description: Paste the issue, pull request, or comment permalink.
+      placeholder: https://github.com/owner/repo/pull/123#issuecomment-1234567890
+    validations:
+      required: true
+  - type: textarea
+    id: why_legitimate
+    attributes:
+      label: Why It Looks Legitimate
+      description: Explain why this appears to be a normal contribution or conversation.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: Describe how the risk hint could affect the maintainer or contributor.
+    validations:
+      required: false

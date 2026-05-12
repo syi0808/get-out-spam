@@ -1,26 +1,42 @@
-# Get Out Spam
+# GET OUT SPAM
 
-Get Out Spam is public maintainer tooling for checking GitHub interactions before moving a conversation off GitHub or sharing private access.
+GET OUT SPAM is a GitHub App that helps small open-source maintainers review suspicious GitHub interactions before moving a conversation off GitHub or sharing sensitive access.
 
-The GitHub Pages app accepts a GitHub issue, pull request, or issue-comment link and sends that URL to a server-side scan API. The page shows a coarse review level and neutral signal labels. It is not a spam verdict system and does not show numeric scores by default.
+For a small open-source project, even one issue, comment, or star can feel meaningful. That makes maintainers more exposed to spam and social-engineering attempts: a friendly message, a request to move to another channel, or an unexpected offer can feel exciting enough to lower caution.
 
-## Local Development
+I experienced this while maintaining `pubm`. The attention around the project felt genuinely welcome, and I nearly moved the conversation to another channel. I cannot know whether that would have caused personal harm, but it made the risk clear enough to build a warning layer for other maintainers.
 
-```bash
-pnpm install --frozen-lockfile
-pnpm test
-pnpm typecheck
-pnpm build
-```
+That is why GET OUT SPAM exists.
 
-## Deployment
+## What It Does
 
-GitHub Pages is deployed by `.github/workflows/deploy-pages.yml`. Configure the repository variable `GET_OUT_SPAM_API_BASE_URL` with the deployed scan API origin before running the workflow.
+- Scores spam risk from public GitHub account history, comment content, and interaction context.
+- Shows maintainers a review hint when an interaction has risk signals.
+- Helps maintainers keep discussion on GitHub and avoid rushing into private access, personal contact, or off-platform communication.
 
-The scan API is deployed from the private source repository. Configure `PUBLIC_SCAN_ALLOWED_ORIGINS` on the Worker with this Pages origin and protect `/api/scan-link` with Cloudflare rate limiting or WAF rules before public beta.
+## What It Does Not Do
 
-## Public/Private Split
+- It does not declare that a user is a spammer, malicious, or acting with a specific intent.
+- It does not detect or block agents, bots, or automated accounts.
+- It does not collect or publish private information beyond publicly visible GitHub data.
+- It does not automatically block, report, or penalize users on behalf of maintainers.
 
-The implementation source, Worker deployment, GitHub App internals, CLI, Action bundle, and operational workflows live in a private source repository. This public repository should contain only the static site, public policy docs, approved assets, and the Pages workflow.
+## Public Scope
 
-See [docs/public-private-split.md](docs/public-private-split.md).
+Publishing the scoring algorithm directly would make it easier to bypass. The current implementation is operated through a GitHub App and a Cloudflare Worker, with operational source managed in a separate repository.
+
+- Operational source repository: https://github.com/syi0808/get-out-spam-source
+- GitHub App installation: https://github.com/apps/get-out-spam
+
+This repository is not an open-source code repository. It is a public page for explaining GET OUT SPAM and collecting issues, missed cases, false positives, and product ideas.
+
+## Reports And Suggestions
+
+Please open an issue if you have:
+
+- A GitHub issue, pull request, or comment that looks like spam but was not detected.
+- A case that was flagged as risky but appears legitimate.
+- An idea for better signals, wording, review flow, or maintainer controls.
+- Feedback on how the public explanation can be clearer.
+
+When reporting a case, include a public GitHub URL whenever possible. Do not post private repository content, personal contact information, tokens, secret keys, or full private conversations.
