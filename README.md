@@ -14,6 +14,12 @@ That is why GET OUT SPAM exists.
 - Shows maintainers a review hint when an interaction has risk signals.
 - Helps maintainers keep discussion on GitHub and avoid rushing into private access, personal contact, or off-platform communication.
 
+## Screenshot
+
+This is the app as maintainers see it when reviewing a GitHub interaction:
+
+![GET OUT SPAM review screen showing maintainer risk signals](docs/screenshot.png)
+
 ## What It Does Not Do
 
 - It does not declare that a user is a spammer, malicious, or acting with a specific intent.
@@ -25,7 +31,6 @@ That is why GET OUT SPAM exists.
 
 Publishing the scoring algorithm directly would make it easier to bypass. The current implementation is operated through a GitHub App and a Cloudflare Worker, with operational source managed in a separate repository.
 
-- Operational source repository: https://github.com/syi0808/get-out-spam-source
 - GitHub App installation: https://github.com/apps/get-out-spam
 
 This repository is not an open-source code repository. It is a public page for explaining GET OUT SPAM and collecting issues, missed cases, false positives, and product ideas.
